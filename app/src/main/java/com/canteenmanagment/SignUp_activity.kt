@@ -33,6 +33,7 @@ class SignUp_activity : AppCompatActivity() {
         //Event
         btn_sign_out.setOnClickListener{
             //Sign Out
+
             AuthUI.getInstance().signOut(this).addOnCompleteListener{
                 btn_sign_out.isEnabled=false
 
@@ -58,7 +59,7 @@ class SignUp_activity : AppCompatActivity() {
             if( FirebaseAuth.getInstance().currentUser == null)
             {
                 Toast.makeText(this,"Please Enter Email id",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, SignUp_activity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
 
             }
