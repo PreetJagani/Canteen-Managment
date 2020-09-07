@@ -16,7 +16,7 @@ class HomePageActivity : AppCompatActivity() {
 
 
 
-    /*    btn_sign_out.setOnClickListener{
+        /*btn_sign_out.setOnClickListener{
             //Sign Out
             AuthUI.getInstance().signOut(this).addOnCompleteListener{
                 btn_sign_out.isEnabled=false

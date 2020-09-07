@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="colorPrimary">#DE6262</color>
+    <color name="colorPrimaryDark">#DE6262</color>
+    <color name="colorAccent">#DE6262</color>
+
     <color name="colorlightblue">#9DD5CF</color>
     <color name="colordarkgreen">#00574B</color>
     <color name="colorlightpurple">#582785</color>
@@ -9,7 +14,6 @@
     <color name="colorlightpink1">#E6BACA</color>
     <color name="colorBlue">#6872A8</color>
 
-
-
+    <color name="neviBlue">#26374D</color>
 
 </resources>

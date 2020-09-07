@@ -23,9 +23,7 @@
                 android:enabled="false"
                 android:text="Sign Out"
                 android:textColor="@color/colorlightpurple"
-                android:background="@drawable/gradient"
-
-                />
+                android:background="@drawable/gradient"/>
 
 
     </LinearLayout>
