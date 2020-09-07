@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "375112624309",
+    "firebase_url": "https://canteen-management-b428e.firebaseio.com",
+    "project_id": "canteen-management-b428e",
+    "storage_bucket": "canteen-management-b428e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375112624309:android:c2770501c69c8c4f4476fc",
+        "android_client_info": {
+          "package_name": "com.canteenManagment.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375112624309-auo4ig7kf6kufmcoin6h8fmdqse9pgrc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.canteenManagment.admin",
+            "certificate_hash": "97451227441e39de90fd33593794ce0a8d133531"
+          }
+        },
+        {
+          "client_id": "375112624309-ragt9207a3uasfc34ds8n88ar19gmr7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDalEq1ahLMTLjjAWM7q2ujMUmVDOwzjxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375112624309-ragt9207a3uasfc34ds8n88ar19gmr7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375112624309:android:6903f1dcb45d18564476fc",
+        "android_client_info": {
+          "package_name": "com.canteenmanagment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375112624309-mqngnnepfvnc11unnquunfne8u9n8g4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.canteenmanagment",
+            "certificate_hash": "09b68edce53fe9b870612e0cf17520cbacced480"
+          }
+        },
+        {
+          "client_id": "375112624309-ragt9207a3uasfc34ds8n88ar19gmr7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDalEq1ahLMTLjjAWM7q2ujMUmVDOwzjxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375112624309-ragt9207a3uasfc34ds8n88ar19gmr7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
