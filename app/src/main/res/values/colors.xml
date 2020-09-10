@@ -16,4 +16,10 @@
 
     <color name="neviBlue">#26374D</color>
 
+    <color name="whiteColour">#FFFFFF</color>
+    <color name="blackColour">#000000</color>
+    <color name="redColour">#BD0000</color>
+
+
+
 </resources>
