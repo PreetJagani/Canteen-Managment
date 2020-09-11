@@ -73,5 +73,14 @@
         <item name="android:textSize">@dimen/medium</item>
     </style>
 
+    <style name="profile_page_text_view_style">
+        <item name="android:drawableEnd">@drawable/ic_baseline_keyboard_arrow_right_24</item>
+        <item name="android:drawablePadding">@dimen/small</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">@dimen/medium</item>
+        <item name="android:textColor">@color/lightBlackColour</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
 
 </resources>
