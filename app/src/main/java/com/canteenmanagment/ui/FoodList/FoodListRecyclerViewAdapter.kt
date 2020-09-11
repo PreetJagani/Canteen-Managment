@@ -1,6 +1,8 @@
 package com.canteenmanagment.ui.FoodList
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -21,6 +23,10 @@ class FoodListRecyclerViewAdapter(val foodList : List<Food>, val listner: ClickL
         holder.binding.TVTitle.text = foodList.get(position).name
         holder.binding.TVPrice.text = foodList.get(position).price.toString() + " Rs."
 
+        if(!foodList.get(position).available){
+            holder.binding.TVNotAvailable.visibility = View.VISIBLE
+            Log.d("Visibility","visible")
+        }
 
         holder.binding.CL.setOnClickListener {
             listner.openActivity(position)

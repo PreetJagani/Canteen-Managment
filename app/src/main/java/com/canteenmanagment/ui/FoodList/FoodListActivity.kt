@@ -50,7 +50,8 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
                 binding.RVFoodList.visibility = View.VISIBLE
                 binding.RVFoodList.adapter = FoodListRecyclerViewAdapter(it,
                     FoodListRecyclerViewAdapter.ClickListner { position ->
-                        Toast.makeText(mContext, position.toString(), Toast.LENGTH_SHORT).show()
+                        if(foodList[position].available)
+                            Toast.makeText(mContext, position.toString(), Toast.LENGTH_SHORT).show()
                     }
                 )
             }
