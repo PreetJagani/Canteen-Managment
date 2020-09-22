@@ -11,13 +11,16 @@ import com.canteenmanagment.R
 import com.canteenmanagment.canteen_managment_library.apiManager.FirebaseApiManager
 import com.canteenmanagment.canteen_managment_library.models.Food
 import com.canteenmanagment.databinding.ActivityFoodListBinding
+import com.canteenmanagment.databinding.AddCartCustomeDiologBinding
 import kotlinx.coroutines.launch
+import com.canteenmanagment.helper.AddCartCustomDiolog
 
 class FoodListActivity : BaseActivity(), View.OnClickListener {
 
     lateinit var binding: ActivityFoodListBinding
     private val mContext: Context = this
     private lateinit var foodList: List<Food>
+    private lateinit var addCartCustomDiolog : AddCartCustomDiolog
 
 
 
@@ -33,6 +36,8 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
         binding.IMback.setOnClickListener(this)
 
         loadData()
+
+        addCartCustomDiolog = AddCartCustomDiolog(this)
 
 
         binding.SRRefreshLayout.setOnRefreshListener {
@@ -51,7 +56,7 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
                 binding.RVFoodList.adapter = FoodListRecyclerViewAdapter(it,
                     FoodListRecyclerViewAdapter.ClickListner { position ->
                         if(foodList[position].available)
-                            Toast.makeText(mContext, position.toString(), Toast.LENGTH_SHORT).show()
+                            addCartCustomDiolog.startDialog(foodList.get(position))
                     }
                 )
             }
