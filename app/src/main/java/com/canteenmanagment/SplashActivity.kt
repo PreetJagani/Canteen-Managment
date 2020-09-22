@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.canteenmanagment.ui.HomeActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {
@@ -18,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
         if(user==null)
             intent = Intent(this,MainActivity::class.java)
         else
-            intent = Intent(this,HomePageActivity::class.java)
+            intent = Intent(this, HomeActivity::class.java)
 
         handler = Handler()
         handler.postDelayed({

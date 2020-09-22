@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomePageActivity"/>
+
         <activity android:name=".SignUp_activity" />
         <activity android:name=".MainActivity" android:theme="@style/loginpage"/>
         <activity
@@ -21,6 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity android:name="com.canteenmanagment.ui.FoodList.FoodListActivity" />
+        <activity android:name=".ui.HomeActivity"/>
+
+
+
     </application>
 
 </manifest>
