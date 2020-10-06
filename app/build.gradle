@@ -36,7 +36,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.firebase:firebase-auth:19.4.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.3.0'
@@ -46,7 +46,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
 
-    implementation 'com.github.PreetJagani:Canteen-managment-admin:v1.0' //github api library
+    implementation 'com.github.PreetJagani:Canteen-managment-admin:v1.1' //github api library
 
     //for bottom navigation bar
     implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.3'
@@ -56,13 +56,16 @@ dependencies {
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
 
     //glide to load image from url
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
     implementation "com.daimajia.easing:library:2.0@aar"
     implementation "com.daimajia.androidanimations:library:2.3@aar"
+
+    //to convert object to string
+    implementation 'com.google.code.gson:gson:2.8.6'
 
 
 
