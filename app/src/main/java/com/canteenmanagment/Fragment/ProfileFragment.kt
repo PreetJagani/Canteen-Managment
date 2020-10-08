@@ -24,8 +24,6 @@ class ProfileFragment : Fragment() {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        //var a= 0/1
-
         FirebaseAuth.getInstance().currentUser.let { firebaseUser ->
             binding.TVEmail.text = firebaseUser?.email
             binding.TVName.text = firebaseUser?.displayName
