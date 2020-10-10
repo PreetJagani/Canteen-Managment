@@ -24,10 +24,6 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        binding.BTCart.setOnClickListener {
-            var i = Intent(context,CartFoodList::class.java)
-            startActivity(i)
-        }
 
         return binding.root
     }

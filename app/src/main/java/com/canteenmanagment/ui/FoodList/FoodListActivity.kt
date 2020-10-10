@@ -1,10 +1,13 @@
 package com.canteenmanagment.ui.FoodList
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.canteenmanagment.BaseActivity.BaseActivity
 import com.canteenmanagment.Fragments.MenuFragment.Companion.CATEGORY_NAME
 import com.canteenmanagment.R
@@ -12,11 +15,13 @@ import com.canteenmanagment.canteen_managment_library.apiManager.FirebaseApiMana
 import com.canteenmanagment.canteen_managment_library.models.CartFood
 import com.canteenmanagment.canteen_managment_library.models.Food
 import com.canteenmanagment.databinding.ActivityFoodListBinding
-import com.canteenmanagment.helper.AddCartCustomDiolog
+import com.canteenmanagment.ui.CartFoodList.CartFoodList
+import com.canteenmanagment.utils.AddCartCustomDiolog
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
 import java.lang.reflect.Type
+
 
 class FoodListActivity : BaseActivity(), View.OnClickListener {
 
@@ -24,6 +29,7 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
     private val mContext: Context = this
     private lateinit var foodList: List<Food>
     private lateinit var addCartCustomDiolog : AddCartCustomDiolog
+    private var flag = false //flag to determine cart has item or no
 
 
 
@@ -40,26 +46,31 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
         binding.IMback.setOnClickListener(this)
 
         loadData()
+        getDataFromSharedPreferences()
 
         addCartCustomDiolog = AddCartCustomDiolog(this)
-
 
         binding.SRRefreshLayout.setOnRefreshListener {
             loadData()
         }
 
+        binding.BTOrderList.setOnClickListener {
+            var i = Intent(mContext, CartFoodList::class.java)
+            startActivity(i)
+        }
 
-        val prefrence = mContext.getSharedPreferences(CART, 0x0000)
-        var cartItemString = prefrence.getString(FoodListActivity.CART_ITEMS, null)
-        var gson = Gson()
-        val type: Type = object : TypeToken<MutableList<CartFood>?>() {}.type
+        binding.RVFoodList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (flag && dy > 0 && binding.BTOrderList.visibility === View.VISIBLE) {
+                    binding.BTOrderList.visibility = View.INVISIBLE
+                } else if (flag && dy < 0 && binding.BTOrderList.visibility === View.INVISIBLE) {
+                    binding.BTOrderList.visibility = View.VISIBLE
+                }
+            }
+        })
 
-        var cartItemList = if (cartItemString != null)
-            gson.fromJson<MutableList<CartFood>>(cartItemString, type)
-        else
-            mutableListOf()
 
-        Log.d("Cart",cartItemList.toString())
 
     }
 
@@ -72,13 +83,12 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
                 binding.RVFoodList.adapter = FoodListRecyclerViewAdapter(it,
                     FoodListRecyclerViewAdapter.ClickListner { position ->
                         if (foodList[position].available)
-                            addCartCustomDiolog.startDialog(foodList.get(position),mContext)
+                            addCartCustomDiolog.startDialog(foodList.get(position),true) { getDataFromSharedPreferences() }
                     }
                 )
             }
         }
     }
-
 
     override fun onClick(v: View?) {
 
@@ -100,6 +110,20 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
         const val CART = "Cart"
         const val CART_ITEMS = "Cart Items"
 
+    }
+    private fun getDataFromSharedPreferences(){
+
+        val preference = application.getSharedPreferences(FoodListActivity.CART, 0x0000)
+        val cartItemString = preference.getString(FoodListActivity.CART_ITEMS, null)
+
+        if (cartItemString != null){
+            flag = true
+            binding.BTOrderList.visibility = View.VISIBLE
+        }
+        else{
+            flag = false
+            binding.BTOrderList.visibility = View.INVISIBLE
+        }
     }
 
 

@@ -1,4 +1,4 @@
-package com.canteenmanagment.helper
+package com.canteenmanagment.utils
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -26,7 +26,7 @@ class AddCartCustomDiolog(val activity: Activity) {
     var gson = Gson()
     val type: Type = object : TypeToken<MutableList<CartFood>?>() {}.type
 
-    fun startDialog(food: Food, mContext: Context) {
+    fun startDialog(food: Food, flag : Boolean = false, function : () -> Unit = {}) {
 
         var dialog = AlertDialog.Builder(activity)
 
@@ -40,6 +40,8 @@ class AddCartCustomDiolog(val activity: Activity) {
                     (view.TV_item_count.text.toString().toInt() + 1).toString()
 
                 updateCart(view.TV_item_count.text.toString().toInt(), food)
+                if (flag)
+                    function()
             }
 
         }
@@ -51,6 +53,8 @@ class AddCartCustomDiolog(val activity: Activity) {
                     (view.TV_item_count.text.toString().toInt() - 1).toString()
 
                 updateCart(view.TV_item_count.text.toString().toInt(), food)
+                if (flag)
+                    function()
             }
         }
 
@@ -111,7 +115,6 @@ class AddCartCustomDiolog(val activity: Activity) {
         editor.putString(FoodListActivity.CART_ITEMS, cartListString)
 
         editor.apply()
-
     }
 
 }
