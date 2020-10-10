@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -46,7 +47,7 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
         binding.IMback.setOnClickListener(this)
 
         loadData()
-        getDataFromSharedPreferences()
+
 
         addCartCustomDiolog = AddCartCustomDiolog(this)
 
@@ -72,6 +73,11 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
 
 
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        getDataFromSharedPreferences()
     }
 
     private fun loadData() {
@@ -116,7 +122,9 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
         val preference = application.getSharedPreferences(FoodListActivity.CART, 0x0000)
         val cartItemString = preference.getString(FoodListActivity.CART_ITEMS, null)
 
-        if (cartItemString != null){
+
+
+        if (cartItemString != null && cartItemString != "[]"){
             flag = true
             binding.BTOrderList.visibility = View.VISIBLE
         }

@@ -36,6 +36,7 @@ class CartFoodList : AppCompatActivity() {
         cartFoodListViewModel = ViewModelProviders.of(this).get(CartFoodListViewModel::class.java)
 
         binding.RVCartFood.setOnTouchListener(OnTouchListener { v, event -> true })
+
         addCartCustomDialog = AddCartCustomDiolog(this)
 
         getDataFromSharedPreferences()
@@ -51,6 +52,10 @@ class CartFoodList : AppCompatActivity() {
             binding.TVTotal.text = "= ${calculateTotalAmount(it)} Rs."
             cartFoodList = it
         })
+
+        binding.IMBack.setOnClickListener {
+            super.onBackPressed()
+        }
 
     }
 
