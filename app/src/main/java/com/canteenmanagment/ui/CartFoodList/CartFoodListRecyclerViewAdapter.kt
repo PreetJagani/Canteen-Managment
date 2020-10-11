@@ -16,7 +16,7 @@ class CartFoodListRecyclerViewAdapter(val cartFoodList : List<CartFood>,val open
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.TVTitle.text = "${cartFoodList.get(position).food.name} (${cartFoodList.get(position).food.price} Rs.)"
-        holder.binding.TVQuantity.text = "X   ${cartFoodList.get(position).qunity}"
+        holder.binding.TVQuantity.text = "X   ${cartFoodList.get(position).quantity}"
         holder.binding.CL.setOnClickListener {
             openCustomeDiolog(position)
         }

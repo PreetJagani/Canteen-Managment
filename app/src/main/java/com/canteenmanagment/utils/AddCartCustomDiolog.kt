@@ -78,8 +78,8 @@ class AddCartCustomDiolog(val activity: Activity) {
 
         for (cartItem in cartItemLIst)
             if (cartItem.food.id.equals(food.id)) {
-                view.TV_item_count.text = cartItem.qunity.toString()
-                break;
+                view.TV_item_count.text = cartItem.quantity.toString()
+                break
             }
     }
 
