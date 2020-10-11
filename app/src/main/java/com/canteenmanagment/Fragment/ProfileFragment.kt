@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.canteenmanagment.MainActivity
 import com.canteenmanagment.databinding.FragmentProfileBinding
+import com.canteenmanagment.ui.UserOrder.UserOrder
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -30,12 +31,17 @@ class ProfileFragment : Fragment() {
         }
 
         binding.TVLogout.setOnClickListener {
-            var mAuth = FirebaseAuth.getInstance()
+            val mAuth = FirebaseAuth.getInstance()
             mAuth.signOut()
-            var i = Intent(activity?.applicationContext, MainActivity::class.java)
+            val i = Intent(activity?.applicationContext, MainActivity::class.java)
 
             startActivity(i)
             activity?.finish()
+        }
+
+        binding.TVMyOrder.setOnClickListener {
+            val i = Intent(context,UserOrder::class.java)
+            startActivity(i)
         }
 
         val versionName = context!!.packageManager
