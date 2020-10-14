@@ -25,17 +25,50 @@
             android:text="My Orders" />
 
         <TextView
+            android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large"
-            android:padding="@dimen/small"
-            android:textColor="@color/whiteColour"
             android:background="@android:color/darker_gray"
+            android:padding="@dimen/small"
             android:text="On Going"
-            android:textSize="20sp"
+            android:textColor="@color/whiteColour"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@+id/TV_title"
             tools:layout_editor_absoluteX="27dp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RV_ongoing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_ongoing_order_layout" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:padding="@dimen/small"
+            android:text="Past Order"
+            android:textSize="16sp"
+            android:textColor="@color/whiteColour"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RV_ongoing" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RV_past_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_past_order_layout1" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
