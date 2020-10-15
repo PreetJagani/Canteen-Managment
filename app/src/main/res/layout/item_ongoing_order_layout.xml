@@ -7,7 +7,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/medium"
+        android:layout_marginRight="@dimen/medium"
+        android:layout_marginLeft="@dimen/medium"
+        android:layout_marginBottom="@dimen/medium"
         app:cardCornerRadius="@dimen/small"
         android:elevation="0dp">
 
@@ -22,9 +24,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Order Id : "
+                android:layout_marginTop="@dimen/small"
                 android:textColor="@color/blackColour"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/TV_status" />
 
             <TextView
                 android:id="@+id/TV_order_id"
@@ -56,10 +59,10 @@
                 android:id="@+id/TV_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
                 android:textColor="@android:color/holo_blue_dark"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TV_status"
                 tools:text="135 Rs." />
 
             <TextView
@@ -67,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
                 app:layout_constraintTop_toBottomOf="@+id/textView6"
                 tools:text="abc X 2 \nxyz X 2\npqr X 3" />
@@ -81,29 +85,15 @@
                 tools:text="10:25 PM" />
 
             <TextView
-                android:id="@+id/TV_status_prepare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_orange_dark"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TV_order_list"
-                android:text="Preparing" />
-
-            <TextView
-                android:id="@+id/TV_status_ready"
+                android:id="@+id/TV_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textColor="@android:color/holo_green_dark"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TV_order_list"
-                android:text="Ready"
-                android:visibility="invisible"/>
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Preparing"
+                android:textColor="@android:color/holo_orange_dark"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

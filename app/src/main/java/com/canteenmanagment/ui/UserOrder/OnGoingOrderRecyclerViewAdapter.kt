@@ -1,5 +1,6 @@
 package com.canteenmanagment.ui.UserOrder
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import com.canteenmanagment.databinding.ItemOngoingOrderLayoutBinding
 import com.canteenmanagment.databinding.ItemPastOrderLayout2Binding
 import com.canteenmanagment.helper.PastOrder
 
-class OnGoingOrderRecyclerViewAdapter(val onGoingOrderList : MutableList<PastOrder>) : RecyclerView.Adapter<OnGoingOrderRecyclerViewAdapter.ViewHolder>() {
+class OnGoingOrderRecyclerViewAdapter(val onGoingOrderList : MutableList<PastOrder>,val mContext : Context) : RecyclerView.Adapter<OnGoingOrderRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -30,12 +31,12 @@ class OnGoingOrderRecyclerViewAdapter(val onGoingOrderList : MutableList<PastOrd
         holder.binding.TVOrderList.text = foodListString
 
         if (onGoingOrderList[position].status.equals(Order.Status.READY.value)){
-            holder.binding.TVStatusPrepare.visibility = View.INVISIBLE
-            holder.binding.TVStatusReady.visibility = View.VISIBLE
+            holder.binding.TVStatus.text = "Ready"
+            holder.binding.TVStatus.setTextColor( mContext.resources.getColor(android.R.color.holo_green_dark))
         }
         else{
-            holder.binding.TVStatusPrepare.visibility = View.VISIBLE
-            holder.binding.TVStatusReady.visibility = View.INVISIBLE
+            holder.binding.TVStatus.text = "Preparing"
+            holder.binding.TVStatus.setTextColor( mContext.resources.getColor(android.R.color.holo_orange_dark))
         }
 
     }
