@@ -81,15 +81,29 @@
                 tools:text="10:25 PM" />
 
             <TextView
-                android:id="@+id/TV_status"
+                android:id="@+id/TV_status_prepare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/holo_orange_dark"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TV_order_list"
-                tools:text="Preparing" />
+                android:text="Preparing" />
+
+            <TextView
+                android:id="@+id/TV_status_ready"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/holo_green_dark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TV_order_list"
+                android:text="Ready"
+                android:visibility="invisible"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

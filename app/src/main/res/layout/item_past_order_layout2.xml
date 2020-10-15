@@ -22,6 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Order Id : "
+                android:textSize="16sp"
                 android:textColor="@color/blackColour"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Transaction Id : "
+                android:textSize="16sp"
                 android:layout_marginTop="@dimen/small"
                 android:textColor="@color/blackColour"
                 app:layout_constraintStart_toStartOf="@+id/textView5"
@@ -56,7 +58,7 @@
                 android:id="@+id/TV_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textColor="@android:color/holo_green_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -67,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
                 app:layout_constraintTop_toBottomOf="@+id/textView6"
                 tools:text="abc X 2 \nxyz X 2\npqr X 3" />
@@ -76,6 +79,7 @@
                 android:textColor="@color/blackColour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/TV_order_list"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="10:25 PM" />
