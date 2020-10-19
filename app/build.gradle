@@ -50,7 +50,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth:19.4.0' // firebase auth
 
-    implementation 'com.github.PreetJagani:Canteen-managment-admin:v1.7' //github api library
+    implementation 'com.github.PreetJagani:Canteen-managment-admin:v1.8' //github api library
 
     //for bottom navigation bar
     implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.3'
