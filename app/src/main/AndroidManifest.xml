@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ui.UserOrder.UserOrder"></activity>
+        <activity android:name=".ui.CartFoodList.CartFoodList" />
         <activity android:name=".SignUp_activity" />
-        <activity android:name=".MainActivity" android:theme="@style/loginpage"/>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/loginpage" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -21,13 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name="com.canteenmanagment.ui.FoodList.FoodListActivity" />
-        <activity android:name=".ui.HomeActivity"/>
-
-
-
+        <activity android:name=".ui.FoodList.FoodListActivity" />
+        <activity android:name=".ui.HomeActivity" />
     </application>
 
 </manifest>

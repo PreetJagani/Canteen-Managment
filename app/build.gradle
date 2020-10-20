@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -9,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.canteenmanagment"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0.0"
@@ -34,19 +35,22 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.wear:wear:1.0.0'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation "com.airbnb.android:lottie:3.0.0"
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
-    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'com.google.firebase:firebase-analytics:17.6.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
 
-    implementation 'com.github.PreetJagani:Canteen-managment-admin:v1.0' //github api library
+
+    implementation 'com.google.firebase:firebase-auth:19.4.0' // firebase auth
+
+    implementation 'com.github.PreetJagani:Canteen-managment-admin:v1.8' //github api library
 
     //for bottom navigation bar
     implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.3'
@@ -55,13 +59,24 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
 
     // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
 
     //glide to load image from url
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
+    implementation "com.daimajia.easing:library:2.0@aar"
+    implementation "com.daimajia.androidanimations:library:2.3@aar"
 
+    //to convert object to string
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Lifecycle components
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    kapt "android.arch.lifecycle:compiler:1.1.1"
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-beta01'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-beta01'
 
 
 }

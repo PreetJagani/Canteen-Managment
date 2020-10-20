@@ -11,12 +11,12 @@
             type="String" />
     </data>
 
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/SR_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/whiteColour">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CL"
@@ -57,8 +57,27 @@
                 tools:itemCount="7"
                 tools:listitem="@layout/item_food_list_layout" />
 
+
+            <Button
+                android:id="@+id/BT_order_list"
+                style="@style/cart_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/large"
+                android:background="@drawable/cart_style"
+                android:elevation="50dp"
+                android:text="Order list"
+                android:textAllCaps="false"
+                android:visibility="invisible"
+                app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </layout>
