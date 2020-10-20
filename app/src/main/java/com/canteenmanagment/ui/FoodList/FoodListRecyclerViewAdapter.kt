@@ -25,7 +25,9 @@ class FoodListRecyclerViewAdapter(val foodList : List<Food>, val listner: ClickL
 
         if(!foodList.get(position).available){
             holder.binding.TVNotAvailable.visibility = View.VISIBLE
-            Log.d("Visibility","visible")
+        }
+        else{
+            holder.binding.TVNotAvailable.visibility = View.INVISIBLE
         }
 
         holder.binding.CL.setOnClickListener {

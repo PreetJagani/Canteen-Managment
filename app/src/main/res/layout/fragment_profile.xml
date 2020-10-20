@@ -86,12 +86,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/TV_email" />
 
             <TextView
-                android:id="@+id/TV_past_order"
+                android:id="@+id/TV_my_order"
                 style="@style/profile_page_text_view_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_assignment_24px"
-                android:text="Past Order"
+                android:text="My Order"
                 app:layout_constraintBottom_toTopOf="@+id/TV_fav"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +108,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/TV_share"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TV_past_order" />
+                app:layout_constraintTop_toBottomOf="@+id/TV_my_order" />
 
             <TextView
                 android:id="@+id/TV_share"
