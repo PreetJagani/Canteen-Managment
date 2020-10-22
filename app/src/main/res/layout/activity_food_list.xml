@@ -58,21 +58,29 @@
                 tools:listitem="@layout/item_food_list_layout" />
 
 
-            <Button
+            <androidx.cardview.widget.CardView
                 android:id="@+id/BT_order_list"
-                style="@style/cart_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/large"
-                android:background="@drawable/cart_style"
-                android:elevation="50dp"
-                android:text="Order list"
                 android:textAllCaps="false"
                 android:visibility="invisible"
-                app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+                app:cardCornerRadius="@dimen/large"
+                app:cardElevation="@dimen/small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    style="@style/cart_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/cart_style"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:text="Order list" />
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
