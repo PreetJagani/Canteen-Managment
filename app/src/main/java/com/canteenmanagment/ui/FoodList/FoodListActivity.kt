@@ -1,27 +1,20 @@
 package com.canteenmanagment.ui.FoodList
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.canteenmanagment.BaseActivity.BaseActivity
 import com.canteenmanagment.Fragments.MenuFragment.Companion.CATEGORY_NAME
 import com.canteenmanagment.R
 import com.canteenmanagment.canteen_managment_library.apiManager.FirebaseApiManager
-import com.canteenmanagment.canteen_managment_library.models.CartFood
 import com.canteenmanagment.canteen_managment_library.models.Food
 import com.canteenmanagment.databinding.ActivityFoodListBinding
 import com.canteenmanagment.ui.CartFoodList.CartFoodList
 import com.canteenmanagment.utils.AddCartCustomDiolog
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
-import java.lang.reflect.Type
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 
 class FoodListActivity : BaseActivity(), View.OnClickListener {
@@ -60,7 +53,7 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
             startActivity(i)
         }
 
-        binding.RVFoodList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        /*binding.RVFoodList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (flag && dy > 0 && binding.BTOrderList.visibility === View.VISIBLE) {
@@ -69,9 +62,9 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
                     binding.BTOrderList.visibility = View.VISIBLE
                 }
             }
-        })
+        })*/
 
-
+        OverScrollDecoratorHelper.setUpOverScroll(binding.RVFoodList, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
     }
 
@@ -89,7 +82,10 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
                 binding.RVFoodList.adapter = FoodListRecyclerViewAdapter(it,
                     FoodListRecyclerViewAdapter.ClickListner { position ->
                         if (foodList[position].available)
-                            addCartCustomDiolog.startDialog(foodList.get(position),true) { getDataFromSharedPreferences() }
+                            addCartCustomDiolog.startDialog(
+                                foodList.get(position),
+                                true
+                            ) { getDataFromSharedPreferences() }
                     }
                 )
             }
