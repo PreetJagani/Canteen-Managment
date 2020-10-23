@@ -30,7 +30,7 @@
                 android:id="@+id/IMback"
                 style="@style/back_button_style"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/TVtitle"

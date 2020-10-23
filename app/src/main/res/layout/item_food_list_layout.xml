@@ -9,8 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small"
         app:cardCornerRadius="@dimen/small"
-        android:elevation="0dp"
-        >
+        android:elevation="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CL"

@@ -22,6 +22,7 @@ import com.shreyaspatil.EasyUpiPayment.EasyUpiPayment
 import com.shreyaspatil.EasyUpiPayment.listener.PaymentStatusListener
 import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails
 import kotlinx.coroutines.launch
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.lang.reflect.Type
 
 
@@ -69,11 +70,10 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
         }
 
         binding.BTPlaceOrder.setOnClickListener {
-
-
             payUsingUpi(calculateTotalAmount(cartFoodList).toString())
-
         }
+
+
 
     }
 

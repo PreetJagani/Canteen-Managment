@@ -14,6 +14,7 @@ import com.canteenmanagment.databinding.ActivityFoodListBinding
 import com.canteenmanagment.ui.CartFoodList.CartFoodList
 import com.canteenmanagment.utils.AddCartCustomDiolog
 import kotlinx.coroutines.launch
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 
 class FoodListActivity : BaseActivity(), View.OnClickListener {
@@ -62,6 +63,8 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
                 }
             }
         })*/
+
+        OverScrollDecoratorHelper.setUpOverScroll(binding.RVFoodList, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
     }
 
