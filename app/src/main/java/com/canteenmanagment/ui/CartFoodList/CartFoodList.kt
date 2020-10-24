@@ -1,8 +1,13 @@
 package com.canteenmanagment.ui.CartFoodList
 
 import android.content.Context
+import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View.OnTouchListener
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -18,15 +23,12 @@ import com.canteenmanagment.utils.CustomProgressBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.shreyaspatil.EasyUpiPayment.EasyUpiPayment
-import com.shreyaspatil.EasyUpiPayment.listener.PaymentStatusListener
-import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails
 import kotlinx.coroutines.launch
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.lang.reflect.Type
 
 
-class CartFoodList : BaseActivity(), PaymentStatusListener {
+class CartFoodList : BaseActivity(){
 
     private lateinit var cartFoodListViewModel: CartFoodListViewModel
     private lateinit var binding: ActivityCartFoodListBinding
@@ -71,6 +73,7 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
 
         binding.BTPlaceOrder.setOnClickListener {
             payUsingUpi(calculateTotalAmount(cartFoodList).toString())
+            //placeOrder("290746891")
         }
 
 
@@ -113,22 +116,24 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
 
     private fun payUsingUpi(amount: String) {
         val name = "Canteen Admin"
-        val upiId = "shaileshjagani9825@okicici"
-        var userName = FirebaseAuth.getInstance().currentUser?.displayName
+        //val upiId = "shaileshjagani9825@okicici"
+        val upiId = "preetjagani@oksbi"
+        val userName = FirebaseAuth.getInstance().currentUser?.displayName
 
-        val easyUpiPayment = EasyUpiPayment.Builder()
-            .with(this)
-            .setPayeeVpa(upiId)
-            .setPayeeName(name)
-            .setTransactionId("20190603022401")
-            .setTransactionRefId("0120192019060302240")
-            .setDescription(userName!!)
-            .setAmount("$amount.00")
+        val uri: Uri = Uri.parse("upi://pay")
+            .buildUpon()
+            .appendQueryParameter("pa", upiId) // virtual ID
+            .appendQueryParameter("pn", name) // name
+            .appendQueryParameter("tn", userName) // any note about payment
+            .appendQueryParameter("am", amount) // amount
+            .appendQueryParameter("cu", "INR") // currency
             .build()
 
-        easyUpiPayment.startPayment()
-
-        easyUpiPayment.setPaymentStatusListener(this)
+        val GOOGLE_PAY_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user"
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = uri
+        intent.setPackage(GOOGLE_PAY_PACKAGE_NAME)
+        startActivityForResult(intent, UPI_PAYMENT)
     }
 
     private fun calculateTotalAmount(cartFoodList: MutableList<CartFood>): Int {
@@ -140,28 +145,93 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
         return total
     }
 
-    override fun onTransactionCompleted(transactionDetails: TransactionDetails?) {
-        if(transactionDetails?.status.equals("Success"))
-            transactionDetails?.transactionId?.let { placeOrder(it) }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.e("main ", "response $resultCode")
+        when (requestCode) {
+            UPI_PAYMENT -> if (RESULT_OK == resultCode || resultCode == 11) {
+                if (data != null) {
+                    val trxt = data.getStringExtra("response")
+                    Log.e("UPI", "onActivityResult: $trxt")
+                    val dataList: ArrayList<String> = ArrayList()
+                    dataList.add(trxt)
+                    upiPaymentDataOperation(dataList)
+                } else {
+                    Log.e("UPI", "onActivityResult: " + "Return data is null")
+                    val dataList: ArrayList<String> = ArrayList()
+                    dataList.add("nothing")
+                    upiPaymentDataOperation(dataList)
+                }
+            } else {
+                //when user simply back without payment
+                Log.e("UPI", "onActivityResult: " + "Return data is null")
+                val dataList: ArrayList<String> = ArrayList()
+                dataList.add("nothing")
+                upiPaymentDataOperation(dataList)
+            }
+        }
     }
 
-    override fun onTransactionSuccess() {
-        showShortToast(mContext,"transaction success")
+    private fun upiPaymentDataOperation(data: ArrayList<String>) {
+        if (isConnectionAvailable(mContext)) {
+            var str = data[0]
+            Log.e("UPIPAY", "upiPaymentDataOperation: $str")
+            var paymentCancel = ""
+            if (str == null) str = "discard"
+            var status = ""
+            var approvalRefNo = ""
+            val response = str.split("&".toRegex()).toTypedArray()
+            for (i in response.indices) {
+                val equalStr = response[i].split("=".toRegex()).toTypedArray()
+                if (equalStr.size >= 2) {
+                    if (equalStr[0].toLowerCase() == "Status".toLowerCase()) {
+                        status = equalStr[1].toLowerCase()
+                    } else if (equalStr[0].toLowerCase() == "ApprovalRefNo".toLowerCase() || equalStr[0].toLowerCase() == "txnRef".toLowerCase()) {
+                        approvalRefNo = equalStr[1]
+                    }
+                } else {
+                    paymentCancel = "Payment cancelled by user."
+                }
+            }
+            if (status == "success") {
+                //Code to handle successful transaction here.
+                placeOrder(approvalRefNo)
+                Log.e("UPI", "payment successfull: $approvalRefNo")
+            } else if ("Payment cancelled by user." == paymentCancel) {
+                Toast.makeText(mContext, "Payment cancelled by user.", Toast.LENGTH_SHORT)
+                    .show()
+                Log.e("UPI", "Cancelled by user: $approvalRefNo")
+            } else {
+                Toast.makeText(
+                    mContext,
+                    "Transaction failed.Please try again",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.e("UPI", "failed payment: $approvalRefNo")
+            }
+        } else {
+            Log.e("UPI", "Internet issue: ")
+            Toast.makeText(
+                mContext,
+                "Internet connection is not available. Please check and try again",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
-    override fun onTransactionSubmitted() {
-        showShortToast(mContext,"Transaction submitted")
+    fun isConnectionAvailable(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val netInfo = connectivityManager.activeNetworkInfo
+            if (netInfo != null && netInfo.isConnected
+                && netInfo.isConnectedOrConnecting
+                && netInfo.isAvailable
+            ) {
+                return true
+            }
+        }
+        return false
     }
 
-    override fun onTransactionFailed() {
-        showShortToast(mContext,"Transaction Fail")
-    }
-
-    override fun onTransactionCancelled() {
-        showShortToast(mContext,"Transaction cancel by user")
-    }
-
-    override fun onAppNotFound() {
-        showShortToast(mContext,"No Upi App found")
-    }
 }

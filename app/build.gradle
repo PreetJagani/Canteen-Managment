@@ -78,9 +78,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-beta01'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-beta01'
 
-    //upi payment
-    implementation 'com.shreyaspatil:EasyUpiPayment:2.0'
-
     //over scroll for recycler view
     implementation 'me.everything:overscroll-decor-android:1.1.0'
 

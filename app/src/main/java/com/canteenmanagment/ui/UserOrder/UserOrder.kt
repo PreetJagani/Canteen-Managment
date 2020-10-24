@@ -35,5 +35,9 @@ class UserOrder : AppCompatActivity() {
             binding.RVReady.adapter = OnGoingOrderRecyclerViewAdapter(viewmodel.getPastOrderListFromOrderList(it),mContext)
         })
 
+        binding.IMBack.setOnClickListener {
+            super.onBackPressed()
+        }
+
     }
 }
