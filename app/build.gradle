@@ -81,5 +81,8 @@ dependencies {
     //over scroll for recycler view
     implementation 'me.everything:overscroll-decor-android:1.1.0'
 
+    //upi payment
+    implementation 'com.shreyaspatil:EasyUpiPayment:2.0'
+
 
 }

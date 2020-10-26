@@ -1,13 +1,8 @@
 package com.canteenmanagment.ui.CartFoodList
 
 import android.content.Context
-import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View.OnTouchListener
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -23,12 +18,16 @@ import com.canteenmanagment.utils.CustomProgressBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.shreyaspatil.EasyUpiPayment.EasyUpiPayment
+import com.shreyaspatil.EasyUpiPayment.listener.PaymentStatusListener
+import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails
 import kotlinx.coroutines.launch
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.lang.reflect.Type
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class CartFoodList : BaseActivity(){
+class CartFoodList : BaseActivity(), PaymentStatusListener {
 
     private lateinit var cartFoodListViewModel: CartFoodListViewModel
     private lateinit var binding: ActivityCartFoodListBinding
@@ -73,7 +72,6 @@ class CartFoodList : BaseActivity(){
 
         binding.BTPlaceOrder.setOnClickListener {
             payUsingUpi(calculateTotalAmount(cartFoodList).toString())
-            //placeOrder("290746891")
         }
 
 
@@ -116,11 +114,31 @@ class CartFoodList : BaseActivity(){
 
     private fun payUsingUpi(amount: String) {
         val name = "Canteen Admin"
-        //val upiId = "shaileshjagani9825@okicici"
-        val upiId = "preetjagani@oksbi"
+        val upiId = "shaileshjagani9825@okicici"
+        //val upiId = "preetjagani@oksbi"
         val userName = FirebaseAuth.getInstance().currentUser?.displayName
 
-        val uri: Uri = Uri.parse("upi://pay")
+        val cal: Calendar = Calendar.getInstance()
+        val f = SimpleDateFormat("YYYYMMddHHmmss")
+        val id = f.format(cal.time)
+        val tID = "T{$id}CM"
+        val rID = "R{$id}CM"
+
+
+        val easyUpiPayment = EasyUpiPayment.Builder()
+            .with(this)
+            .setPayeeVpa(upiId)
+            .setPayeeName(name)
+            .setTransactionId(tID)
+            .setTransactionRefId(rID)
+            .setDescription(userName!!)
+            .setAmount("$amount.00")
+            .build()
+
+        easyUpiPayment.startPayment()
+        easyUpiPayment.setPaymentStatusListener(this)
+
+        /*val uri: Uri = Uri.parse("upi://pay")
             .buildUpon()
             .appendQueryParameter("pa", upiId) // virtual ID
             .appendQueryParameter("pn", name) // name
@@ -133,7 +151,9 @@ class CartFoodList : BaseActivity(){
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = uri
         intent.setPackage(GOOGLE_PAY_PACKAGE_NAME)
-        startActivityForResult(intent, UPI_PAYMENT)
+        startActivityForResult(intent, UPI_PAYMENT)*/
+
+
     }
 
     private fun calculateTotalAmount(cartFoodList: MutableList<CartFood>): Int {
@@ -144,6 +164,34 @@ class CartFoodList : BaseActivity(){
 
         return total
     }
+
+    override fun onTransactionCompleted(transactionDetails: TransactionDetails?) {
+        if(transactionDetails?.status.equals("SUCCESS")){
+            showShortToast(mContext,"Transaction completed")
+            transactionDetails?.transactionId?.let { placeOrder(transactionId = it) }
+        }
+    }
+
+    override fun onTransactionSuccess() {
+        showShortToast(mContext,"Transaction success")
+    }
+
+    override fun onTransactionSubmitted() {
+        showShortToast(mContext,"Transaction Submited")
+    }
+
+    override fun onTransactionFailed() {
+        showShortToast(mContext,"Transaction fail")
+    }
+
+    override fun onTransactionCancelled() {
+        showShortToast(mContext,"Transaction cancel by user")
+    }
+
+    override fun onAppNotFound() {
+        showShortToast(mContext,"No Upi App found")
+    }
+/*
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -233,5 +281,6 @@ class CartFoodList : BaseActivity(){
         }
         return false
     }
+*/
 
 }
