@@ -25,8 +25,6 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
     private lateinit var addCartCustomDiolog : AddCartCustomDiolog
     private var flag = false //flag to determine cart has item or no
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_list)
@@ -117,8 +115,6 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
 
         val preference = application.getSharedPreferences(FoodListActivity.CART, 0x0000)
         val cartItemString = preference.getString(FoodListActivity.CART_ITEMS, null)
-
-
 
         if (cartItemString != null && cartItemString != "[]"){
             flag = true

@@ -71,7 +71,8 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
         }
 
         binding.BTPlaceOrder.setOnClickListener {
-            payUsingUpi(calculateTotalAmount(cartFoodList).toString())
+            //payUsingUpi(calculateTotalAmount(cartFoodList).toString())
+            placeOrder("469204901")
         }
 
 
@@ -123,7 +124,6 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
         val id = f.format(cal.time)
         val tID = "T{$id}CM"
         val rID = "R{$id}CM"
-
 
         val easyUpiPayment = EasyUpiPayment.Builder()
             .with(this)
