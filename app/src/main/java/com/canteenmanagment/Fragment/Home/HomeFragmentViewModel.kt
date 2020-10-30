@@ -21,6 +21,15 @@ class HomeFragmentViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
+    var favFoodList: LiveData<List<Food>> = liveData {
+        FirebaseApiManager.getAllFavouriteFoods().let {
+            if (it.isSuccess)
+                emit(it.data as List<Food>)
+            else
+                emit(listOf<Food>())
+        }
+    }
+
 
 
 }

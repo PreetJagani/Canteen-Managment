@@ -84,5 +84,8 @@ dependencies {
     //upi payment
     implementation 'com.shreyaspatil:EasyUpiPayment:2.0'
 
+    //animated fav button
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
+
 
 }
