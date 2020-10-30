@@ -7,6 +7,8 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.canteenmanagment.BaseActivity.BaseActivity
 import com.canteenmanagment.Fragments.MenuFragment.Companion.CATEGORY_NAME
+import com.canteenmanagment.Fragments.ProfileFragment
+import com.canteenmanagment.Fragments.ProfileFragment.Companion.FAVOURITE
 import com.canteenmanagment.R
 import com.canteenmanagment.canteen_managment_library.apiManager.FirebaseApiManager
 import com.canteenmanagment.canteen_managment_library.models.Food
@@ -26,6 +28,8 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
     private var flag = false //flag to determine cart has item or no
     private lateinit var favFoodList: MutableList<Food>
 
+    private var isFavouriteActivity: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_list)
@@ -34,13 +38,20 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
             this,
             R.layout.activity_food_list
         )
-        binding.title = intent.getStringExtra(CATEGORY_NAME)
+
+        isFavouriteActivity = intent.getBooleanExtra(FAVOURITE,false)
+
+        if(!isFavouriteActivity)
+            binding.title = intent.getStringExtra(CATEGORY_NAME)
+        else
+            binding.title = "Favourite Food"
 
         binding.IMback.setOnClickListener(this)
 
         loadData()
 
-        addCartCustomDialog = AddCartCustomDialog(this,{ food ->  addToFav(food) },{ food ->  removeFromFav(food) })
+        addCartCustomDialog =
+            AddCartCustomDialog(this, { food -> addToFav(food) }, { food -> removeFromFav(food) })
 
         binding.SRRefreshLayout.setOnRefreshListener {
             loadData()
@@ -52,7 +63,6 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
         }
 
         scope.launch {
-
             favFoodList = FirebaseApiManager.getAllFavouriteFoods().let {
                 if (it.isSuccess)
                     it.data as MutableList<Food>
@@ -86,33 +96,66 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun loadData() {
-        scope.launch {
-            FirebaseApiManager.getAllFoodFromCategory(intent.getStringExtra(CATEGORY_NAME)).let {
-                binding.SRRefreshLayout.isRefreshing = false
-                foodList = it
-                binding.RVFoodList.visibility = View.VISIBLE
+        if (!isFavouriteActivity)
+            scope.launch {
+                FirebaseApiManager.getAllFoodFromCategory(intent.getStringExtra(CATEGORY_NAME))
+                    .let {
+                        binding.SRRefreshLayout.isRefreshing = false
+                        foodList = it
+                        binding.RVFoodList.visibility = View.VISIBLE
 
+                        binding.RVFoodList.adapter = FoodListRecyclerViewAdapter(it,
+                            FoodListRecyclerViewAdapter.ClickListner { position ->
 
+                                var flag = false
+                                if (favFoodList.indexOf(foodList[position]) != -1)
+                                    flag = true
 
-                binding.RVFoodList.adapter = FoodListRecyclerViewAdapter(it,
-                    FoodListRecyclerViewAdapter.ClickListner { position ->
-
-                        var flag = false
-                        if(favFoodList.indexOf( foodList[position] ) != -1)
-                            flag = true
-
-                        if (foodList[position].available)
-                            addCartCustomDialog.startDialog(
-                                foodList[position],
-                                true,
-                                { getDataFromSharedPreferences() },
-                                isFavorite = flag,
-                                isFavVisible = true
-                            )
+                                if (foodList[position].available)
+                                    addCartCustomDialog.startDialog(
+                                        foodList[position],
+                                        true,
+                                        { getDataFromSharedPreferences() },
+                                        isFavorite = flag,
+                                        isFavVisible = true
+                                    )
+                            }
+                        )
                     }
-                )
             }
-        }
+
+        else
+            scope.launch {
+                FirebaseApiManager.getAllFavouriteFoods()
+                    .let {
+                        if(it.isSuccess) {
+                            binding.SRRefreshLayout.isRefreshing = false
+                            foodList = it.data as List<Food>
+                            binding.RVFoodList.visibility = View.VISIBLE
+
+                            binding.RVFoodList.adapter =
+                                FoodListRecyclerViewAdapter(it.data as List<Food>,
+                                    FoodListRecyclerViewAdapter.ClickListner { position ->
+
+                                        var flag = false
+                                        if (favFoodList.indexOf(foodList[position]) != -1)
+                                            flag = true
+
+                                        if (foodList[position].available)
+                                            addCartCustomDialog.startDialog(
+                                                foodList[position],
+                                                true,
+                                                { getDataFromSharedPreferences() },
+                                                isFavorite = flag,
+                                                isFavVisible = true
+                                            )
+                                    }
+                                )
+                        }
+                    }
+            }
+
+
     }
 
     override fun onClick(v: View?) {
@@ -130,7 +173,7 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
     private fun addToFav(food: Food) {
         scope.launch {
             FirebaseApiManager.addFoodToFavourite(food).let {
-                if(it.isSuccess)
+                if (it.isSuccess)
                     favFoodList.add(food)
 
             }
@@ -140,17 +183,15 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
     private fun removeFromFav(food: Food) {
         scope.launch {
             FirebaseApiManager.removeFoodFromFavourite(food).let {
-                if(it.isSuccess)
+                if (it.isSuccess)
                     favFoodList.remove(food)
             }
         }
     }
 
     companion object {
-
         const val CART = "Cart"
         const val CART_ITEMS = "Cart Items"
-
     }
 
     private fun getDataFromSharedPreferences() {
