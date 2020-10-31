@@ -6,18 +6,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
+import android.widget.ScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import com.canteenmanagment.canteen_managment_library.apiManager.FirebaseApiManager
 import com.canteenmanagment.canteen_managment_library.models.Food
 import com.canteenmanagment.databinding.FragmentHomeBinding
+import com.canteenmanagment.helper.getCurrentHour
+import com.canteenmanagment.helper.getCurrentMinute
+import com.canteenmanagment.helper.getTimeLabel
 import com.canteenmanagment.ui.CartFoodList.CartFoodList
 import com.canteenmanagment.ui.FoodList.FoodListActivity
 import com.canteenmanagment.utils.AddCartCustomDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 class HomeFragment : Fragment() {
 
@@ -36,7 +43,8 @@ class HomeFragment : Fragment() {
 
         addCartCustomDialog = AddCartCustomDialog(activity as Activity, { food ->  addToFav(food) },{ food ->  removeFromFav(food) })
 
-        viewmodel.foodList.observe(this, Observer {
+
+        viewmodel.pastFoodList.observe(this, Observer {
             if (it.isNotEmpty())
                 binding.textView9.visibility = View.VISIBLE
 
@@ -79,6 +87,30 @@ class HomeFragment : Fragment() {
 
         })
 
+        viewmodel.foodList.observe(this, Observer {
+
+            if (it.isNotEmpty()){
+                binding.TVGreetings.visibility = View.VISIBLE
+                setGreetings()
+            }
+
+            binding.RVFood.adapter = FoodRecyclerViewAdapter(it) { position ->
+
+                var flag = false
+                if(favFoodList.indexOf( it[position] ) != -1)
+                    flag = true
+
+                addCartCustomDialog.startDialog(
+                    it[position],
+                    true,
+                    { getDataFromSharedPreferences() },
+                    isFavorite = flag,
+                    isFavVisible = true
+                )
+            }
+
+        })
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         getDataFromSharedPreferences()
@@ -88,6 +120,8 @@ class HomeFragment : Fragment() {
             startActivity(i)
         }
 
+        binding.RVFood.layoutManager = GridLayoutManager(context, 2)
+
         return binding.root
     }
 
@@ -95,6 +129,8 @@ class HomeFragment : Fragment() {
         _binding = null
         super.onDestroy()
     }
+
+
 
     private fun addToFav(food: Food) {
         scope.launch {
@@ -112,6 +148,15 @@ class HomeFragment : Fragment() {
                 if(it.isSuccess)
                     favFoodList.remove(food)
             }
+        }
+    }
+
+    private fun setGreetings(){
+        var timeLabel = getTimeLabel(getCurrentHour(), getCurrentMinute())
+        when(timeLabel){
+            "Morning"-> binding.TVGreetings.text = "Start your day with healthy breakfast"
+            "Afternoon" -> binding.TVGreetings.text = "Afternoon lunch For you"
+            "Evening" -> binding.TVGreetings.text = "Some snacks for you"
         }
     }
 
