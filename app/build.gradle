@@ -87,5 +87,9 @@ dependencies {
     //animated fav button
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
+    //qr code generator
+    implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
+    implementation 'com.google.zxing:core:3.3.2'
+
 
 }
