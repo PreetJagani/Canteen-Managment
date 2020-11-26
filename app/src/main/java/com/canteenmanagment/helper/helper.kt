@@ -21,7 +21,8 @@ fun getCurrentHour() : Int{
     val timeZone = f.format(cal.time)
 
     if(timeZone.toLowerCase().equals("pm"))
-        hour += 12
+        if(hour != 12)
+            hour += 12
 
     return hour
 }
