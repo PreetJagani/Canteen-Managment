@@ -5,13 +5,13 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.canteenmanagment"
         minSdkVersion 24
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 2
         versionName "1.0.1"
 
@@ -50,7 +50,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth:19.4.0' // firebase auth
 
-    implementation 'com.github.PreetJagani:Canteen-managment-admin:v1.12' //github api library
+    implementation 'com.github.PreetJagani:Canteen-managment-admin:v1.13' //github api library
 
     //for bottom navigation bar
     implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.3'

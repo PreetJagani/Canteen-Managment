@@ -2,14 +2,17 @@ package com.canteenmanagment.ui.CartFoodList
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.view.View.OnTouchListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.canteenmanagment.BaseActivity.BaseActivity
+import com.canteenmanagment.Fragment.Home.FavoriteFoodRecyclerViewAdapter
 import com.canteenmanagment.R
 import com.canteenmanagment.canteen_managment_library.apiManager.FirebaseApiManager
 import com.canteenmanagment.canteen_managment_library.models.CartFood
+import com.canteenmanagment.canteen_managment_library.models.Food
 import com.canteenmanagment.databinding.ActivityCartFoodListBinding
 import com.canteenmanagment.helper.showShortToast
 import com.canteenmanagment.ui.FoodList.FoodListActivity
@@ -64,6 +67,8 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
 
             binding.TVTotal.text = "= ${calculateTotalAmount(it)} Rs."
             cartFoodList = it
+
+            getRecommendedFood()
         })
 
         binding.IMBack.setOnClickListener {
@@ -74,6 +79,7 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
             //payUsingUpi(calculateTotalAmount(cartFoodList).toString())
             placeOrder("469204901")
         }
+
 
 
     }
@@ -110,6 +116,34 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
             mutableListOf()
 
         cartFoodListViewModel.cartFoodList.postValue(cartItemLIst)
+
+
+    }
+
+    private fun getRecommendedFood() {
+        //val cartFoodList = cartFoodListViewModel.cartFoodList.value
+
+        scope.launch {
+
+            val recommendedFood : MutableList<Food> = mutableListOf()
+            for (cartFood in cartFoodList) {
+                FirebaseApiManager.getRecommendedFood(cartFood.food.id!!).let {
+                    if (it.isSuccess){
+                        binding.textView10.visibility = View.VISIBLE
+                        recommendedFood.addAll(it.data as List<Food>)
+                    }
+                }
+            }
+
+            binding.RVRecommendedFood.adapter = FavoriteFoodRecyclerViewAdapter(recommendedFood) { position ->
+
+                addCartCustomDialog.startDialog(
+                    recommendedFood[position],
+                    true,
+                    { getDataFromSharedPreferences() }
+                )
+            }
+        }
     }
 
     private fun payUsingUpi(amount: String) {
