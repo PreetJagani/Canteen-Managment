@@ -98,7 +98,7 @@ class FoodListActivity : BaseActivity(), View.OnClickListener {
     private fun loadData() {
         if (!isFavouriteActivity)
             scope.launch {
-                FirebaseApiManager.getAllFoodFromCategory(intent.getStringExtra(CATEGORY_NAME))
+                FirebaseApiManager.getAllFoodFromCategory(intent.getStringExtra(CATEGORY_NAME)!!)
                     .let {
                         binding.SRRefreshLayout.isRefreshing = false
                         foodList = it

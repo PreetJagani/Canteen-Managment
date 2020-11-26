@@ -25,19 +25,21 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintHeight_default="wrap"
             android:layout_marginLeft="@dimen/medium"
             android:layout_marginTop="@dimen/large"
             android:layout_marginRight="@dimen/medium"
             android:padding="@dimen/medium"
             app:cardCornerRadius="@dimen/small"
-            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="wrap"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TV_title"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_chainStyle="spread">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -76,7 +78,36 @@
 
             </ScrollView>
 
+
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="448dp"
+            android:fontFamily="@font/mavenpro_semi_bold"
+            android:text="People also like"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/RV_recommended_food"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardView4"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RV_recommended_food"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            tools:listitem="@layout/item_food_layout1" />
 
         <Button
             android:id="@+id/BT_place_order"
