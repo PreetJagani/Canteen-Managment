@@ -125,15 +125,23 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
 
         scope.launch {
 
-            val recommendedFood : MutableList<Food> = mutableListOf()
+            var recommendedFood : MutableList<Food> = mutableListOf()
             for (cartFood in cartFoodList) {
                 FirebaseApiManager.getRecommendedFood(cartFood.food.id!!).let {
                     if (it.isSuccess){
-                        binding.textView10.visibility = View.VISIBLE
                         recommendedFood.addAll(it.data as List<Food>)
                     }
                 }
             }
+
+
+
+            recommendedFood = arrangeFood(recommendedFood)
+
+            if(recommendedFood.isNotEmpty())
+                binding.textView10.visibility = View.VISIBLE
+            else
+                binding.textView10.visibility = View.INVISIBLE
 
             binding.RVRecommendedFood.adapter = FavoriteFoodRecyclerViewAdapter(recommendedFood) { position ->
 
@@ -196,6 +204,36 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
             total += cartFood.quantity * cartFood.food.price!!
 
         return total
+    }
+
+    private fun arrangeFood(foodList : MutableList<Food>) : MutableList<Food>{
+
+        val arrangeFoodList = mutableListOf<Food>()
+
+        var cartFoodList1 = mutableListOf<CartFood>()
+
+        for(food in foodList){
+            var flag = true
+            for(cartFood in cartFoodList1)
+                if(cartFood.food.id.equals(food.id)){
+                    cartFood.quantity++ //maybe bug here
+                    flag = false
+                    break
+                }
+            if(flag)
+                cartFoodList1.add(CartFood(1,food))
+        }
+
+        cartFoodList1 = cartFoodList1.sortedByDescending { it-> it.quantity } as MutableList<CartFood>
+
+        for(cartFood in cartFoodList1)
+            arrangeFoodList.add(cartFood.food)
+
+        for(cartFood in cartFoodList)
+            if(arrangeFoodList.contains(cartFood.food))
+                arrangeFoodList.remove(cartFood.food)
+
+        return arrangeFoodList
     }
 
     override fun onTransactionCompleted(transactionDetails: TransactionDetails?) {
