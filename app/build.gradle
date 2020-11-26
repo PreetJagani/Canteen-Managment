@@ -12,8 +12,8 @@ android {
         applicationId "com.canteenmanagment"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 2
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,7 +50,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth:19.4.0' // firebase auth
 
-    implementation 'com.github.PreetJagani:Canteen-managment-admin:v1.8' //github api library
+    implementation 'com.github.PreetJagani:Canteen-managment-admin:v1.12' //github api library
 
     //for bottom navigation bar
     implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.3'
@@ -84,5 +84,14 @@ dependencies {
     //upi payment
     implementation 'com.shreyaspatil:EasyUpiPayment:2.0'
 
+    //animated fav button
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
+
+    //qr code generator
+    implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
+    implementation 'com.google.zxing:core:3.3.3'
+
+    //firebase notification
+    implementation 'com.google.firebase:firebase-messaging:21.0.0'
 
 }

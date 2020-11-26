@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.UserOrder.UserOrder"></activity>
+
+        <activity android:name=".ui.UserOrder.UserOrder" />
         <activity android:name=".ui.CartFoodList.CartFoodList" />
         <activity android:name=".SignUp_activity" />
         <activity
@@ -26,6 +27,13 @@
         </activity>
         <activity android:name=".ui.FoodList.FoodListActivity" />
         <activity android:name=".ui.HomeActivity" />
+
+        <service android:name=".utils.FirebaseNotification">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

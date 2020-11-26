@@ -3,8 +3,9 @@ package com.canteenmanagment.utils
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
+import android.view.View
 import com.canteenmanagment.R
 import com.canteenmanagment.canteen_managment_library.models.CartFood
 import com.canteenmanagment.canteen_managment_library.models.Food
@@ -13,24 +14,41 @@ import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.like.LikeButton
+import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.add_cart_custome_diolog.view.*
 import java.lang.reflect.Type
 
-class AddCartCustomDiolog(val activity: Activity) {
+class AddCartCustomDialog(private val activity: Activity, val addToFav : (food : Food) -> Unit = {}, val removeFromFav : (food: Food) -> Unit = {}) {
 
     lateinit var alertDialog: Dialog
     private val MAX_ITEM = 5
     private val MIN_ITEM = 0
-    val prefrence = activity.getSharedPreferences(FoodListActivity.CART, 0x0000)
+    private val preference: SharedPreferences? = activity.getSharedPreferences(
+        FoodListActivity.CART,
+        0x0000
+    )
 
-    var gson = Gson()
-    val type: Type = object : TypeToken<MutableList<CartFood>?>() {}.type
+    private var gson = Gson()
+    private val type: Type = object : TypeToken<MutableList<CartFood>?>() {}.type
 
-    fun startDialog(food: Food, flag : Boolean = false, function : () -> Unit = {}) {
+    fun startDialog(
+        food: Food,
+        flag: Boolean = false,
+        function: () -> Unit = {},
+        isFavorite: Boolean = false,
+        isFavVisible: Boolean = false
+    ) {
 
-        var dialog = AlertDialog.Builder(activity)
+        val dialog = AlertDialog.Builder(activity)
 
-        var view = LayoutInflater.from(activity).inflate(R.layout.add_cart_custome_diolog, null)
+        val view = LayoutInflater.from(activity).inflate(R.layout.add_cart_custome_diolog, null)
+
+        if(!isFavVisible)
+            view.BT_fav.visibility = View.INVISIBLE
+
+        if(isFavorite)
+            view.BT_fav.isLiked = true
 
         view.IM_plus.setOnClickListener {
 
@@ -58,8 +76,21 @@ class AddCartCustomDiolog(val activity: Activity) {
             }
         }
 
+        view.BT_fav.setOnLikeListener(object : OnLikeListener {
+            override fun liked(likeButton: LikeButton) {
+                addToFav(food)
+            }
+            override fun unLiked(likeButton: LikeButton) {
+                removeFromFav(food)
+            }
+        })
+
         view.TV_name.text = food.name
         view.TV_price.text = "(${food.price}  Rs.)"
+
+        view.IM_close.setOnClickListener {
+            stopDiaolog()
+        }
 
         dialog.setView(view)
 
@@ -69,9 +100,9 @@ class AddCartCustomDiolog(val activity: Activity) {
         alertDialog.getWindow()?.setBackgroundDrawableResource(android.R.color.transparent)
 
 
-        var cartItemString = prefrence.getString(FoodListActivity.CART_ITEMS, null)
+        val cartItemString = preference?.getString(FoodListActivity.CART_ITEMS, null)
 
-        var cartItemLIst = if (cartItemString != null)
+        val cartItemLIst = if (cartItemString != null)
             gson.fromJson<List<CartFood>>(cartItemString, type)
         else
             emptyList()
@@ -89,9 +120,9 @@ class AddCartCustomDiolog(val activity: Activity) {
 
     private fun updateCart(quantity: Int, food: Food) {
 
-        var cartItemString = prefrence.getString(FoodListActivity.CART_ITEMS, null)
+        val cartItemString = preference?.getString(FoodListActivity.CART_ITEMS, null)
 
-        var cartItemList = if (cartItemString != null)
+        val cartItemList = if (cartItemString != null)
             gson.fromJson<MutableList<CartFood>>(cartItemString, type)
         else
             mutableListOf()
@@ -109,12 +140,12 @@ class AddCartCustomDiolog(val activity: Activity) {
         if (!flag)
             cartItemList.add(CartFood(quantity, food))
 
-        val editor = prefrence.edit()
+        val editor = preference?.edit()
 
-        var cartListString = gson.toJson(cartItemList)
-        editor.putString(FoodListActivity.CART_ITEMS, cartListString)
+        val cartListString = gson.toJson(cartItemList)
+        editor?.putString(FoodListActivity.CART_ITEMS, cartListString)
 
-        editor.apply()
+        editor?.apply()
     }
 
 }

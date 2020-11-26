@@ -13,7 +13,7 @@ import com.canteenmanagment.canteen_managment_library.models.CartFood
 import com.canteenmanagment.databinding.ActivityCartFoodListBinding
 import com.canteenmanagment.helper.showShortToast
 import com.canteenmanagment.ui.FoodList.FoodListActivity
-import com.canteenmanagment.utils.AddCartCustomDiolog
+import com.canteenmanagment.utils.AddCartCustomDialog
 import com.canteenmanagment.utils.CustomProgressBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
@@ -31,7 +31,7 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
 
     private lateinit var cartFoodListViewModel: CartFoodListViewModel
     private lateinit var binding: ActivityCartFoodListBinding
-    private lateinit var addCartCustomDialog: AddCartCustomDiolog
+    private lateinit var addCartCustomDialog: AddCartCustomDialog
     private var cartFoodList: MutableList<CartFood> = mutableListOf()
     private var mContext: Context = this
     private val customProgressBar: CustomProgressBar = CustomProgressBar(this)
@@ -50,16 +50,16 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
 
         binding.RVCartFood.setOnTouchListener(OnTouchListener { v, event -> true })
 
-        addCartCustomDialog = AddCartCustomDiolog(this)
+        addCartCustomDialog = AddCartCustomDialog(this)
 
         getDataFromSharedPreferences()
 
         cartFoodListViewModel.cartFoodList.observe(this, Observer {
 
             binding.RVCartFood.adapter = CartFoodListRecyclerViewAdapter(it) { position ->
-                addCartCustomDialog.startDialog(cartFoodList.get(position).food, true) {
-                    getDataFromSharedPreferences()
-                }
+                addCartCustomDialog.startDialog(cartFoodList.get(position).food, true,
+                    { getDataFromSharedPreferences() }
+                )
             }
 
             binding.TVTotal.text = "= ${calculateTotalAmount(it)} Rs."
@@ -71,9 +71,9 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
         }
 
         binding.BTPlaceOrder.setOnClickListener {
-            payUsingUpi(calculateTotalAmount(cartFoodList).toString())
+            //payUsingUpi(calculateTotalAmount(cartFoodList).toString())
+            placeOrder("469204901")
         }
-
 
 
     }
@@ -124,7 +124,6 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
         val tID = "T{$id}CM"
         val rID = "R{$id}CM"
 
-
         val easyUpiPayment = EasyUpiPayment.Builder()
             .with(this)
             .setPayeeVpa(upiId)
@@ -166,30 +165,30 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
     }
 
     override fun onTransactionCompleted(transactionDetails: TransactionDetails?) {
-        if(transactionDetails?.status.equals("SUCCESS")){
-            showShortToast(mContext,"Transaction completed")
+        if (transactionDetails?.status.equals("SUCCESS")) {
+            showShortToast(mContext, "Transaction completed")
             transactionDetails?.transactionId?.let { placeOrder(transactionId = it) }
         }
     }
 
     override fun onTransactionSuccess() {
-        showShortToast(mContext,"Transaction success")
+        showShortToast(mContext, "Transaction success")
     }
 
     override fun onTransactionSubmitted() {
-        showShortToast(mContext,"Transaction Submited")
+        showShortToast(mContext, "Transaction Submited")
     }
 
     override fun onTransactionFailed() {
-        showShortToast(mContext,"Transaction fail")
+        showShortToast(mContext, "Transaction fail")
     }
 
     override fun onTransactionCancelled() {
-        showShortToast(mContext,"Transaction cancel by user")
+        showShortToast(mContext, "Transaction cancel by user")
     }
 
     override fun onAppNotFound() {
-        showShortToast(mContext,"No Upi App found")
+        showShortToast(mContext, "No Upi App found")
     }
 /*
 

@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.canteenmanagment.BaseActivity.BaseActivity
-import com.canteenmanagment.Fragments.HomeFragment
+import com.canteenmanagment.Fragment.Home.HomeFragment
 import com.canteenmanagment.Fragments.MenuFragment
 import com.canteenmanagment.Fragments.ProfileFragment
 import com.canteenmanagment.R

@@ -10,7 +10,7 @@ import com.canteenmanagment.databinding.ItemOngoingOrderLayoutBinding
 import com.canteenmanagment.databinding.ItemPastOrderLayout2Binding
 import com.canteenmanagment.helper.PastOrder
 
-class OnGoingOrderRecyclerViewAdapter(val onGoingOrderList : MutableList<PastOrder>,val mContext : Context) : RecyclerView.Adapter<OnGoingOrderRecyclerViewAdapter.ViewHolder>() {
+class OnGoingOrderRecyclerViewAdapter(val onGoingOrderList : MutableList<PastOrder>,val mContext : Context, val openOrderDetailDialog : (orderId : String, transacnId : String)->Unit) : RecyclerView.Adapter<OnGoingOrderRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -33,6 +33,10 @@ class OnGoingOrderRecyclerViewAdapter(val onGoingOrderList : MutableList<PastOrd
         if (onGoingOrderList[position].status.equals(Order.Status.READY.value)){
             holder.binding.TVStatus.text = "Ready"
             holder.binding.TVStatus.setTextColor( mContext.resources.getColor(android.R.color.holo_green_dark))
+            holder.binding.CL.setOnClickListener {
+                openOrderDetailDialog(onGoingOrderList[position].id?:"",onGoingOrderList[position].transactionId?:"")
+            }
+
         }
         else{
             holder.binding.TVStatus.text = "Preparing"

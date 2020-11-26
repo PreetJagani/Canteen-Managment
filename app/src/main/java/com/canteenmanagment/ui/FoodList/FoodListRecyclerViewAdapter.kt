@@ -36,7 +36,7 @@ class FoodListRecyclerViewAdapter(val foodList : List<Food>, val listner: ClickL
 
 
         Glide.with(holder.binding.root)
-            .load(foodList.get(position).imageUrl)
+            .load(foodList.get(position).imageurl)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .centerCrop()
             .placeholder(R.drawable.error_image)

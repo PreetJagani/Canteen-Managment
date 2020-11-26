@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.canteenmanagment.MainActivity
 import com.canteenmanagment.databinding.FragmentProfileBinding
+import com.canteenmanagment.ui.FoodList.FoodListActivity
 import com.canteenmanagment.ui.UserOrder.UserOrder
 import com.google.firebase.auth.FirebaseAuth
 
@@ -49,7 +50,11 @@ class ProfileFragment : Fragment() {
 
         binding.TVVersion.text = "V" + versionName
 
-
+        binding.TVFav.setOnClickListener {
+            val i = Intent(context,FoodListActivity::class.java)
+            i.putExtra(FAVOURITE,true)
+            startActivity(i)
+        }
 
 
 
@@ -61,4 +66,9 @@ class ProfileFragment : Fragment() {
         _binding = null
         super.onDestroy()
     }
+
+    companion object{
+        const val FAVOURITE = "Favourite"
+    }
+
 }
