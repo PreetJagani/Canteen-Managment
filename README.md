@@ -1,6 +1,6 @@
 # Canteen-Managment
 
-#This repo is under development
+# This repo is under development
 
 ## Welcome Page
 
