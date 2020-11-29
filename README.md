@@ -1,5 +1,7 @@
 # Canteen-Managment
 
+#This repo is under development
+
 ## Welcome Page
 
 ![welcome](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F1.png?alt=media&token=227e4066-01bd-4c0a-a165-a520d33bc8d6)
