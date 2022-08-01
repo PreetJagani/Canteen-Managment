@@ -1,7 +1,5 @@
 # Canteen-Managment
 
-# This repo is under development
-
 ## Welcome Page
 
 ![welcome](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F1.png?alt=media&token=227e4066-01bd-4c0a-a165-a520d33bc8d6)
@@ -22,6 +20,8 @@
 
 ![p1](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F11.png?alt=media&token=8fabc48c-ceb8-4b26-afb9-b511704aa115)
 
+![p2](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F16.png?alt=media&token=8f066dce-2cbc-4147-8741-92cc39d98f2c) ![p3](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F17.png?alt=media&token=060cc2b1-2840-432a-9ade-3ec7b1ad6131)
+
 ## Menu Page(Admin Side)
 
 ![m1](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F12.png?alt=media&token=e891b39e-9aeb-452f-9dec-70c6edaaefd6)
@@ -32,3 +32,8 @@
 
 ![m4](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F15.png?alt=media&token=a9650c89-d3c3-482e-919a-9acaf22bed8d)
 
+![m5](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F18.png?alt=media&token=7790b0f3-87d4-4ead-944a-83b7ff71d26e) 
+
+## Recomandation
+
+![r1](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F20.png?alt=media&token=1b6a232b-15a5-431c-a9fa-83cd4cead5c8) ![r2](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F21.png?alt=media&token=302cf01f-31c8-4c39-8139-074357fa8122)
