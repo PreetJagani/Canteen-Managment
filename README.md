@@ -1,10 +1,8 @@
 # Canteen-Managment
 
-# This repo is under development
-
 ## Welcome Page
 
-![welcome](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F1.png?alt=media&token=227e4066-01bd-4c0a-a165-a520d33bc8d6)
+![welcome](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/GitHub%20new%20photos%2F1.png?alt=media&token=ca3d765f-801e-4dbb-b252-abd8be3a1aeb)
 
 ## Sign up and login page
 
@@ -20,7 +18,7 @@
 
 ## Profile page
 
-![p1](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F11.png?alt=media&token=8fabc48c-ceb8-4b26-afb9-b511704aa115)
+![p1](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/GitHub%20new%20photos%2F2.png?alt=media&token=201a8468-2d26-4bc6-b402-435c15371eb7)
 
 ## Menu Page(Admin Side)
 
