@@ -76,7 +76,7 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
         }
 
         binding.BTPlaceOrder.setOnClickListener {
-            //payUsingUpi(calculateTotalAmount(cartFoodList).toString())
+//            payUsingUpi(calculateTotalAmount(cartFoodList).toString())
             placeOrder("469204901")
         }
 

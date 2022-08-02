@@ -16,8 +16,8 @@ class ExampleUnitTest {
     fun timeLabel_isCorrect1() {
         assertEquals(getTimeLabel(8,15), "Close")
     }
-    @Test
 
+    @Test
     fun timeLabel_isCorrect2() {
         assertEquals(getTimeLabel(8,30), "Morning")
     }
@@ -49,6 +49,10 @@ class ExampleUnitTest {
     @Test
     fun timeLabel_isCorrect8() {
         assertEquals(getTimeLabel(20,0), "Close")
+    }
+    @Test
+    fun timeLabel_isCorrect9() {
+        assertEquals(getTimeLabel(12,30), "Afternoon")
     }
 
 

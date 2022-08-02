@@ -24,7 +24,6 @@ class SignUp_activity : AppCompatActivity() {
         //Init
         providers = asList<AuthUI.IdpConfig>(
             AuthUI.IdpConfig.EmailBuilder().build()  //Email Login
-
         )
 
         showSignInOption()
@@ -64,7 +63,5 @@ class SignUp_activity : AppCompatActivity() {
     private fun showSignInOption() {
         startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers)
             .build(),MY_REQUEST_CODE)
-
-
     }
 }
