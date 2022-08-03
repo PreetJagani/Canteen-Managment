@@ -1,34 +1,32 @@
 # Canteen-Managment
 
-# This repo is under development
-
 ## Welcome Page
 
-![welcome](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F1.png?alt=media&token=227e4066-01bd-4c0a-a165-a520d33bc8d6)
+<img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/1.png" alt="Welcome Page" width=240/>
 
 ## Sign up and login page
 
-![s1](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F2.png?alt=media&token=d460a5fd-e8bc-4337-b51f-dc83a44d3dd2) ![s2](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F3.png?alt=media&token=9870c9c5-a93d-4986-a3c9-b765130aaa74)
+<img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/2.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/3.png" alt="Welcome Page" width=240/> 
 
-![s3](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F5.png?alt=media&token=7f04e8a4-655a-4397-bb2a-522cd7ded868)
+<img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/4.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/5.png" alt="Welcome Page" width=240/> 
 
-![s4](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F6.png?alt=media&token=2faea152-d2ce-409d-b5f0-a7b2d4a173ce)
+## Home Page
 
-![s5](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F7.png?alt=media&token=8af6e38f-1121-4e5d-9cda-8efc8fd070e5)
+<img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/6.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/7.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/8.png" alt="Welcome Page" width=240/>
 
-![s6](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F8.png?alt=media&token=60928969-1de3-461c-8f6b-46803d2f51c8)  ![s7](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F9.png?alt=media&token=102d690e-f15b-4343-ad70-17c9adb3fe61)   ![s8](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F10.png?alt=media&token=c2df28b0-ec7f-48ac-b7f9-5c1d66333565)
+## Orders Page
 
-## Profile page
+<img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/9.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/10.png" alt="Welcome Page" width=240/>
 
-![p1](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F11.png?alt=media&token=8fabc48c-ceb8-4b26-afb9-b511704aa115)
+<img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/15.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/16.png" alt="Welcome Page" width=240/>
 
-## Menu Page(Admin Side)
+## Recommendation
 
-![m1](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F12.png?alt=media&token=e891b39e-9aeb-452f-9dec-70c6edaaefd6)
+<img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/11.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/12.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/13.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/14.png" alt="Welcome Page" width=240/>
 
-![m2](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F13.png?alt=media&token=1917545c-237b-4fa8-b04c-2e0d5b1b6baf)
+## Admin Page
 
-![m3](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F14.png?alt=media&token=fd981a41-70e6-4e2f-b23a-4111d6e58469)
+<img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/21.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/22.png" alt="Welcome Page" width=240/>
 
-![m4](https://firebasestorage.googleapis.com/v0/b/canteen-management-b428e.appspot.com/o/Github%20Photos%2F15.png?alt=media&token=a9650c89-d3c3-482e-919a-9acaf22bed8d)
+<img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/23.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/24.png" alt="Welcome Page" width=240/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/PreetJagani/Canteen-Managment/test-readme/.github/ss/25.png" alt="Welcome Page" width=240/>
 
