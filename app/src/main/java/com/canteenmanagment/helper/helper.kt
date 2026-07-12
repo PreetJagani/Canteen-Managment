@@ -2,13 +2,33 @@ package com.canteenmanagment.helper
 
 import android.content.Context
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.min
 
 fun showShortToast(mContext : Context,message : String){
     Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show()
+}
+
+/**
+ * Android 15+ (targetSdk 35+) draws content edge-to-edge unconditionally, so screens
+ * that relied on the theme reserving space for the status/navigation bars need to pad
+ * for those insets themselves.
+ */
+fun View.applySystemBarInsets(top: Boolean = true, bottom: Boolean = true) {
+    ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
+        val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+        v.updatePadding(
+            top = if (top) bars.top else v.paddingTop,
+            bottom = if (bottom) bars.bottom else v.paddingBottom
+        )
+        insets
+    }
 }
 
 fun getCurrentHour() : Int{
