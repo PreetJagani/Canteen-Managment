@@ -224,7 +224,7 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
                 cartFoodList1.add(CartFood(1,food))
         }
 
-        cartFoodList1 = cartFoodList1.sortedByDescending { it-> it.quantity } as MutableList<CartFood>
+        cartFoodList1 = cartFoodList1.sortedByDescending { it-> it.quantity }.toMutableList()
 
         for(cartFood in cartFoodList1)
             arrangeFoodList.add(cartFood.food)

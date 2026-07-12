@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
         })
 
         viewmodel.favFoodList.observe(this, Observer {
-            favFoodList = it as MutableList<Food>
+            favFoodList = it.toMutableList()
 
             if (it.isNotEmpty())
                 binding.textView10.visibility = View.VISIBLE

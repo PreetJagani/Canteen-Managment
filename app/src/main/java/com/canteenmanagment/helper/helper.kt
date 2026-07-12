@@ -57,11 +57,11 @@ fun getCurrentMinute() : Int{
 
 fun getTimeLabel(hour : Int, minute : Int) : String{
 
-    val MORNING_START_HOUR = 8
-    val MORNING_START_MINUTE = 30
+    val MORNING_START_HOUR = 6
+    val MORNING_START_MINUTE = 0
     val AFTERNOON_START_HOUR = 11
-    val EVENING_START_HOUR = 15
-    val EVENING_END_HOUR = 18
+    val EVENING_START_HOUR = 17
+    val EVENING_END_HOUR = 23
 
     if(hour in MORNING_START_HOUR until AFTERNOON_START_HOUR){
         if(hour == MORNING_START_HOUR && minute<MORNING_START_MINUTE)
