@@ -10,7 +10,7 @@ import android.widget.GridLayout
 import android.widget.ScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.canteenmanagment.canteen_managment_library.apiManager.FirebaseApiManager
 import com.canteenmanagment.canteen_managment_library.models.Food
@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewmodel = ViewModelProviders.of(this).get(HomeFragmentViewModel::class.java)
+        viewmodel = ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
 
         addCartCustomDialog = AddCartCustomDialog(activity as Activity, { food ->  addToFav(food) },{ food ->  removeFromFav(food) })
 

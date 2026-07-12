@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.canteenmanagment.R
 import com.canteenmanagment.databinding.ActivityUserOrderBinding
 import com.canteenmanagment.utils.OrderDetailDialog
@@ -21,7 +21,7 @@ class UserOrder : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_order)
-        viewmodel = ViewModelProviders.of(this).get(UserOrderViewModel::class.java)
+        viewmodel = ViewModelProvider(this).get(UserOrderViewModel::class.java)
         orderDetailDialog = OrderDetailDialog(this)
 
         setContentView(binding.root)

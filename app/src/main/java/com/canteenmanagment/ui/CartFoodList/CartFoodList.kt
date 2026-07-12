@@ -6,7 +6,7 @@ import android.view.View
 import android.view.View.OnTouchListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.canteenmanagment.BaseActivity.BaseActivity
 import com.canteenmanagment.Fragment.Home.FavoriteFoodRecyclerViewAdapter
 import com.canteenmanagment.R
@@ -21,9 +21,10 @@ import com.canteenmanagment.utils.CustomProgressBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.shreyaspatil.EasyUpiPayment.EasyUpiPayment
-import com.shreyaspatil.EasyUpiPayment.listener.PaymentStatusListener
-import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails
+import dev.shreyaspatil.easyupipayment.EasyUpiPayment
+import dev.shreyaspatil.easyupipayment.listener.PaymentStatusListener
+import dev.shreyaspatil.easyupipayment.model.TransactionDetails
+import dev.shreyaspatil.easyupipayment.model.TransactionStatus
 import kotlinx.coroutines.launch
 import java.lang.reflect.Type
 import java.text.SimpleDateFormat
@@ -49,7 +50,7 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
             this,
             R.layout.activity_cart_food_list
         )
-        cartFoodListViewModel = ViewModelProviders.of(this).get(CartFoodListViewModel::class.java)
+        cartFoodListViewModel = ViewModelProvider(this).get(CartFoodListViewModel::class.java)
 
         binding.RVCartFood.setOnTouchListener(OnTouchListener { v, event -> true })
 
@@ -166,8 +167,7 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
         val tID = "T{$id}CM"
         val rID = "R{$id}CM"
 
-        val easyUpiPayment = EasyUpiPayment.Builder()
-            .with(this)
+        val easyUpiPayment = EasyUpiPayment.Builder(this)
             .setPayeeVpa(upiId)
             .setPayeeName(name)
             .setTransactionId(tID)
@@ -236,31 +236,17 @@ class CartFoodList : BaseActivity(), PaymentStatusListener {
         return arrangeFoodList
     }
 
-    override fun onTransactionCompleted(transactionDetails: TransactionDetails?) {
-        if (transactionDetails?.status.equals("SUCCESS")) {
+    override fun onTransactionCompleted(transactionDetails: TransactionDetails) {
+        if (transactionDetails.transactionStatus == TransactionStatus.SUCCESS) {
             showShortToast(mContext, "Transaction completed")
-            transactionDetails?.transactionId?.let { placeOrder(transactionId = it) }
+            transactionDetails.transactionId?.let { placeOrder(transactionId = it) }
+        } else {
+            showShortToast(mContext, "Transaction fail")
         }
-    }
-
-    override fun onTransactionSuccess() {
-        showShortToast(mContext, "Transaction success")
-    }
-
-    override fun onTransactionSubmitted() {
-        showShortToast(mContext, "Transaction Submited")
-    }
-
-    override fun onTransactionFailed() {
-        showShortToast(mContext, "Transaction fail")
     }
 
     override fun onTransactionCancelled() {
         showShortToast(mContext, "Transaction cancel by user")
-    }
-
-    override fun onAppNotFound() {
-        showShortToast(mContext, "No Upi App found")
     }
 /*
 

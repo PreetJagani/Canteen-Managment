@@ -8,7 +8,6 @@ import android.widget.Toast
 import com.canteenmanagment.ui.HomeActivity
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_sign_up_activity.*
 import java.util.Arrays.asList
 import com.firebase.ui.auth.IdpResponse.fromResultIntent as fromResultIntent1
 
